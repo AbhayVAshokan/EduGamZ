@@ -1,4 +1,4 @@
-# edugamz
+# EduGamZ
 
 A new Flutter project.
 
