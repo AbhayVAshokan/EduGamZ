@@ -7,8 +7,20 @@ class FlipPhoneAlert extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
+        body: Container(
+          width: mediaQuery.size.width,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xffc3e7dd),
+                Colors.white,
+                Colors.white,
+                Color(0xffc3e7dd),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
           padding: const EdgeInsets.symmetric(
             horizontal: 30.0,
             vertical: 20.0,
@@ -34,10 +46,12 @@ class FlipPhoneAlert extends StatelessWidget {
                 ),
               )),
               Expanded(
-                child: Image.asset(
-                  'assets/images/landscape.jpg',
-                  fit: BoxFit.contain,
-                  width: mediaQuery.size.width,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      image: const AssetImage('assets/images/landscape.jpg'),
+                    ),
+                  ),
                 ),
               ),
               Expanded(
