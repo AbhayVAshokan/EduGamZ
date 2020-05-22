@@ -49,6 +49,7 @@ flutter:
     - assets/images/
     - assets/images/avatars/
     - assets/images/themes/
+    - assets/images/quiz_more_than_one/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:edugamz/models/game/mcq.dart';
 import 'package:edugamz/resources/realtime_data.dart';
 import 'package:edugamz/screens/flip_phone_alert.dart';
+import 'package:edugamz/screens/game_more_than_one.dart';
 import 'package:edugamz/widgets/game/bottom_bar.dart';
 import 'package:edugamz/widgets/game/question.dart';
 import 'package:edugamz/widgets/game/top_bar.dart';

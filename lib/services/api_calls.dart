@@ -64,27 +64,27 @@ getQuestions() {
       options: [
         {
           'text': 'Frog',
-          'Image': null,
+          'image': 'assets/images/quiz_more_than_one/frog.png',
           'correct': true,
         },
         {
           'text': 'Fish',
-          'Image': null,
+          'image': 'assets/images/quiz_more_than_one/fish.png',
           'correct': true,
         },
         {
           'text': 'Butterfly',
-          'Image': null,
+          'image': 'assets/images/quiz_more_than_one/butterfly.png',
           'correct': false,
         },
         {
           'text': 'Crab',
-          'Image': null,
+          'image': 'assets/images/quiz_more_than_one/crab.png',
           'correct': true,
         },
         {
           'text': 'Pig',
-          'Image': null,
+          'image': 'assets/images/quiz_more_than_one/pig.png',
           'correct': false,
         },
       ],
