@@ -1,4 +1,4 @@
-import 'package:edugamz/models/theme.dart';
+import 'package:edugamz/resources/realtime_data.dart';
 import 'package:edugamz/widgets/pick_theme/theme_card.dart';
 import 'package:flutter/material.dart';
 

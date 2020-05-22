@@ -1,6 +1,6 @@
+import 'package:edugamz/models/themes.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/theme.dart';
 
 class ThemeCard extends StatelessWidget {
   final Themes themeData;

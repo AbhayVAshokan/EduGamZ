@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:edugamz/screens/flip_phone_alert.dart';
+import 'package:edugamz/services/api_calls.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -9,13 +10,17 @@ class WelcomeScreen extends StatelessWidget {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     final bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
-    if (isLandscape)
+    getThemes();
+    getQuestions();
+
+    if (isLandscape) {
       Timer(
         const Duration(seconds: 3),
         () {
           Navigator.pushReplacementNamed(context, '/level');
         },
       );
+    }
 
     return SafeArea(
       child: Scaffold(

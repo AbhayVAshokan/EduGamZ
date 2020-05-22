@@ -1,4 +1,7 @@
 import 'package:edugamz/screens/category_screen.dart';
+import 'package:edugamz/screens/countdown_screen.dart';
+import 'package:edugamz/screens/game_mcq.dart';
+import 'package:edugamz/screens/game_results.dart';
 import 'package:edugamz/screens/pick_level.dart';
 import 'package:edugamz/screens/pick_theme.dart';
 import 'package:edugamz/screens/welcome_screen.dart';
@@ -42,6 +45,21 @@ class EduGamZ extends StatelessWidget {
           case '/theme':
             screen = fadeTransition(
               screen: PickTheme(),
+            );
+            break;
+          case '/countdown':
+            screen = fadeTransition(
+              screen: CountDownScreen(),
+            );
+            break;
+          case '/gameResults':
+            screen = fadeTransition(
+              screen: GameResults(),
+            );
+            break;
+          case '/gameMCQ':
+            screen = fadeTransition(
+              screen: GameMCQ(),
             );
             break;
           default:
