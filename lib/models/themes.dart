@@ -1,3 +1,5 @@
+// Class to represent available themes.
+
 import 'package:flutter/material.dart';
 
 class Themes {

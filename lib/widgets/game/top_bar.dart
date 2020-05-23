@@ -1,3 +1,5 @@
+// Display the top bar containing game stats.
+
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {
@@ -14,7 +16,6 @@ class TopBar extends StatelessWidget {
               painter: RankBarPainter(),
               child: Container(
                 height: 60.0,
-                // color: Colors.white,
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: FittedBox(

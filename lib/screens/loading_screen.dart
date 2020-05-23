@@ -1,15 +1,18 @@
+// Loading screen: A placeholder screen when the HTTP requests are occuring in the background.
+
 import 'dart:async';
 
-import 'package:edugamz/resources/realtime_data.dart';
-import 'package:edugamz/screens/game_mcq.dart';
 import 'package:flutter/material.dart';
 
-class CountDownScreen extends StatefulWidget {
+import '../screens/game_mcq.dart';
+import '../resources/realtime_data.dart';
+
+class LoadingScreen extends StatefulWidget {
   @override
   _CountDownState createState() => _CountDownState();
 }
 
-class _CountDownState extends State<CountDownScreen> {
+class _CountDownState extends State<LoadingScreen> {
   @override
   void initState() {
     Timer(
@@ -23,7 +26,7 @@ class _CountDownState extends State<CountDownScreen> {
           builder: (context) => GameMCQ(
             question: mcqQuestions[0],
           ),
-        ),
+        )
       ),
     );
 

@@ -1,11 +1,11 @@
-  // Change the hierarchy to include answers
+  // Class to represent Match-the-following questions.
 
 import 'package:flutter/foundation.dart';
 
 class MatchTheFollowing {
   final String question;
   final List<String> texts;
-  final List<String> images;
+  final List<Map<String, dynamic>> images;
 
   MatchTheFollowing({
     @required this.question,

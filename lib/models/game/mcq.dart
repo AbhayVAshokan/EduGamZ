@@ -1,3 +1,5 @@
+// Class to represent MCQ questions.
+
 import 'package:flutter/foundation.dart';
 
 class MCQ {

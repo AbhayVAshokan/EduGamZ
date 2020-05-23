@@ -1,6 +1,8 @@
+// Screen to choose between the categories: Choose theme, Make your game.
+
 import 'package:flutter/material.dart';
 
-import 'package:edugamz/screens/flip_phone_alert.dart';
+import '../screens/flip_phone_alert.dart';
 
 class CategoryScreen extends StatefulWidget {
   @override

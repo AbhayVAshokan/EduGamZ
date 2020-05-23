@@ -1,3 +1,5 @@
+// Bottom bar in the quiz screens containning Close and Coin buttons
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';

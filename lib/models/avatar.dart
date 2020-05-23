@@ -1,3 +1,5 @@
+// Class to represent player avatar
+
 import 'package:flutter/material.dart';
 
 class Avatar {

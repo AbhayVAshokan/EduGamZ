@@ -1,7 +1,9 @@
-import 'package:edugamz/resources/realtime_data.dart';
+// Individual avatar cards.
+
 import 'package:flutter/material.dart';
 
 import '../../models/avatar.dart';
+import '../../resources/realtime_data.dart';
 
 class AvatarCard extends StatefulWidget {
   final Avatar avatar;
@@ -46,7 +48,7 @@ class _AvatarCardState extends State<AvatarCard> with TickerProviderStateMixin {
       animation: _scaleAnimation,
       builder: (context, child) => GestureDetector(
         onTap: () {
-          avatarChosen = widget.avatar.name;
+          playerAvatar = widget.avatar.name;
           _animationController.forward();
           widget.rebuildScreen();
         },

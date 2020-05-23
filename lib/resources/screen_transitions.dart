@@ -1,3 +1,5 @@
+// Different types of screen transition animations.
+
 import 'package:flutter/material.dart';
 
 // Screen fade transition.

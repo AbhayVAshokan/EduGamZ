@@ -1,13 +1,15 @@
-import 'package:edugamz/screens/category_screen.dart';
-import 'package:edugamz/screens/countdown_screen.dart';
-import 'package:edugamz/screens/game_mcq.dart';
-import 'package:edugamz/screens/game_results.dart';
-import 'package:edugamz/screens/pick_level.dart';
-import 'package:edugamz/screens/pick_theme.dart';
-import 'package:edugamz/screens/welcome_screen.dart';
+// File to configure default theme, font and routes.
+
 import 'package:flutter/material.dart';
 
-import 'package:edugamz/resources/screen_transitions.dart';
+import './screens/game_mcq.dart';
+import './screens/pick_level.dart';
+import './screens/pick_theme.dart';
+import './screens/game_results.dart';
+import './screens/loading_screen.dart';
+import './screens/welcome_screen.dart';
+import './screens/category_screen.dart';
+import './resources/screen_transitions.dart';
 
 void main() {
   runApp(EduGamZ());
@@ -49,7 +51,7 @@ class EduGamZ extends StatelessWidget {
             break;
           case '/countdown':
             screen = fadeTransition(
-              screen: CountDownScreen(),
+              screen: LoadingScreen(),
             );
             break;
           case '/gameResults':

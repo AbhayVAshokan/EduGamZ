@@ -1,3 +1,5 @@
+// Class to represent More-than-one-correct answer type questions.
+
 import 'package:flutter/foundation.dart';
 
 class MoreThanOneCorrect {

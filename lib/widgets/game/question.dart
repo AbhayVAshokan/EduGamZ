@@ -1,3 +1,5 @@
+// Display the question inside a yellow container.
+
 import 'package:flutter/material.dart';
 
 class Question extends StatelessWidget {

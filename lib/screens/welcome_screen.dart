@@ -1,8 +1,11 @@
+// Welcoming the user into the game by a mouse: Miss Mouse
+
 import 'dart:async';
 
-import 'package:edugamz/screens/flip_phone_alert.dart';
-import 'package:edugamz/services/api_calls.dart';
 import 'package:flutter/material.dart';
+
+import '../services/api_calls.dart';
+import '../screens/flip_phone_alert.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -10,6 +13,7 @@ class WelcomeScreen extends StatelessWidget {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     final bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
+    // API requests
     getThemes();
     getQuestions();
 
