@@ -16,7 +16,7 @@ class PickTheme extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: mediaQuery.size.height * 0.15,
+                  height: mediaQuery.size.height * 0.12,
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(
                     vertical: mediaQuery.size.height * 0.06,
@@ -26,7 +26,7 @@ class PickTheme extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
+                    vertical: 5.0,
                   ),
                   child: FittedBox(
                     fit: BoxFit.scaleDown,

@@ -1,7 +1,5 @@
 // File to configure default theme, font and routes.
 
-import 'package:edugamz/screens/game_circle_answer.dart';
-import 'package:edugamz/screens/game_fill_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +11,8 @@ import './screens/splash_screen.dart';
 import './screens/loading_screen.dart';
 import './screens/welcome_screen.dart';
 import './screens/category_screen.dart';
+import './screens/game_circle_answer.dart';
+import './screens/game_fill_container.dart';
 import './resources/screen_transitions.dart';
 
 void main() {
@@ -89,6 +89,7 @@ class EduGamZ extends StatelessWidget {
               screen: GameCircleAnswer(),
             );
             break;
+
           default:
         }
         return screen;

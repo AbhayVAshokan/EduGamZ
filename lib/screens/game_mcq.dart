@@ -1,95 +1,94 @@
 import 'dart:async';
 
+import 'package:edugamz/screens/answer_animation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/game/mcq.dart';
+import '../resources/dummy_data.dart';
 import '../widgets/game/top_bar.dart';
 import '../widgets/game/question.dart';
-import '../resources/realtime_data.dart';
 import '../widgets/game/bottom_bar.dart';
 import '../screens/game_more_than_one.dart';
 
 class GameMCQ extends StatefulWidget {
-  final MCQ question;
-  GameMCQ({this.question});
+  final MCQ question = dummyMcqQuestions[0];
 
   @override
   _GameMCQState createState() => _GameMCQState();
 }
 
 class _GameMCQState extends State<GameMCQ> with TickerProviderStateMixin {
-  int correctOption = 0;
-  List<Animation> animation = [];
-  List<AnimationController> animationController = [];
+  int chances = 2;
+  List<Color> borderColor = [];
 
   @override
   initState() {
+    for (int i = 0; i < widget.question.options.length; i++)
+      borderColor.add(Colors.black);
+
     super.initState();
-
-    for (int i = 0; i < widget.question.options.length; i++) {
-      animationController.add(
-        AnimationController(
-          vsync: this,
-          duration: const Duration(milliseconds: 250),
-        ),
-      );
-
-      if (widget.question.options[i].compareTo(widget.question.correctAnswer) ==
-          0) {
-        animation.add(
-          ColorTween(begin: Colors.white, end: Colors.green)
-              .animate(animationController[i]),
-        );
-        correctOption = i;
-      } else
-        animation.add(
-          ColorTween(begin: Colors.white, end: Colors.red)
-              .animate(animationController[i]),
-        );
-    }
   }
 
   Widget mcqOption({
-    @required String option,
-    @required AnimationController animationController,
-    @required AnimationController correctAnimationController,
-    @required Animation animation,
+    @required int index,
+    @required MediaQueryData mediaQuery,
   }) {
-    return AnimatedBuilder(
-      animation: animation,
-      builder: (ctx, child) => GestureDetector(
-        onTap: () {
-          Timer(
-            const Duration(seconds: 1),
-            () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    GameMoreThanOne(question: moreThanOneCorrect[0]),
+    return GestureDetector(
+      onTap: () {
+        final bool correct = widget.question.options[index]
+                .compareTo(widget.question.correctAnswer) ==
+            0;
+
+        setState(() {
+          for (int i = 0; i < widget.question.options.length; i++)
+            borderColor[i] = Colors.deepPurple[900];
+          borderColor[index] = correct ? Colors.green : Colors.red;
+          chances--;
+        });
+
+        Timer(
+          const Duration(milliseconds: 250),
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AnswerAnimation(
+                correct: correct,
+                nextScreen: (correct || chances <= 0)
+                    ? GameMoreThanOne(question: dummyMoreThanOneCorrect[0])
+                    : null,
               ),
             ),
-          );
-          animationController.forward();
-          correctAnimationController.forward();
-        },
-        child: Container(
-          width: 120,
-          height: 120,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 5.0,
           ),
-          decoration: BoxDecoration(
-            color: animation.value,
-            border: Border.all(),
-            borderRadius: BorderRadius.circular(30.0),
+        );
+
+        Timer(const Duration(milliseconds: 501), () {
+          setState(() {
+            for (int i = 0; i < widget.question.options.length; i++)
+              borderColor[i] = Colors.black;
+          });
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        width: mediaQuery.size.height * 0.3,
+        height: mediaQuery.size.height * 0.3,
+        margin: const EdgeInsets.symmetric(
+          horizontal: 10.0,
+          vertical: 5.0,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: borderColor[index],
+            width: 1.5,
           ),
-          alignment: Alignment.center,
-          child: Text(
-            option,
-            style: const TextStyle(
-              fontSize: 18.0,
-            ),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          widget.question.options[index],
+          style: const TextStyle(
+            fontSize: 18.0,
           ),
         ),
       ),
@@ -109,6 +108,7 @@ class _GameMCQState extends State<GameMCQ> with TickerProviderStateMixin {
               Column(
                 children: [
                   TopBar(),
+                  SizedBox(height: mediaQuery.size.height * 0.025),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -123,11 +123,8 @@ class _GameMCQState extends State<GameMCQ> with TickerProviderStateMixin {
                                 i < widget.question.options.length;
                                 i++)
                               mcqOption(
-                                option: widget.question.options[i],
-                                animation: animation[i],
-                                animationController: animationController[i],
-                                correctAnimationController:
-                                    animationController[correctOption],
+                                index: i,
+                                mediaQuery: mediaQuery,
                               ),
                           ],
                         ),

@@ -36,11 +36,11 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 35.0),
-                const Text(
+                Text(
                   'Hey!\nWelcome aboard!\nI am Miss Mouse',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 22.5,
+                  style: TextStyle(
+                    fontSize: mediaQuery.size.height > 300 ? 22 : 18,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

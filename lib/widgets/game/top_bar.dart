@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+
     showComingSoon() {
       showCupertinoDialog(
         context: context,
@@ -18,6 +20,7 @@ class TopBar extends StatelessWidget {
 
     return SizedBox(
       width: MediaQuery.of(context).size.width,
+      height: mediaQuery.size.height * 0.15,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -28,7 +31,6 @@ class TopBar extends StatelessWidget {
               child: CustomPaint(
                 painter: RankBarPainter(),
                 child: Container(
-                  height: 60.0,
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: FittedBox(
@@ -38,7 +40,7 @@ class TopBar extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.deepPurple,
+                        color: const Color(0xff915587),
                       ),
                     ),
                   ),
@@ -50,7 +52,6 @@ class TopBar extends StatelessWidget {
             flex: 2,
             child: CustomPaint(
               child: Container(
-                height: 60.0,
                 width: MediaQuery.of(context).size.width * 0.4 + 60,
                 alignment: Alignment.center,
                 child: FittedBox(
@@ -60,7 +61,7 @@ class TopBar extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black54,
+                      color: const Color(0xff887e01),
                     ),
                   ),
                 ),
@@ -75,7 +76,6 @@ class TopBar extends StatelessWidget {
               child: Center(
                 child: CustomPaint(
                   child: Container(
-                    height: 60.0,
                     alignment: Alignment.centerRight,
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: FittedBox(
@@ -85,7 +85,7 @@ class TopBar extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue[900],
+                          color: const Color(0xff3f6182),
                         ),
                       ),
                     ),
@@ -105,17 +105,16 @@ class TopBar extends StatelessWidget {
 class RankBarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()..color = const Color(0xffd1b2d2);
+    final Paint paint = Paint()..color = const Color(0xffd9b8d9);
 
     final Path path = Path()
       ..lineTo(0, size.height)
-      ..lineTo(size.width, size.height)
-      ..relativeLineTo(-60, -size.height)
-      // ..relativeQuadraticBezierTo(15, 0, 0, -15)
+      ..lineTo(size.width - 10, size.height)
+      ..relativeQuadraticBezierTo(10, 0, 0, -10)
+      ..relativeLineTo(-60, -size.height + 10)
       ..close();
+    canvas.drawShadow(path, Colors.black, 7.5, false);
     canvas.drawPath(path, paint);
-
-    // canvas.drawShadow(path, Colors.black, 5.0, false);
   }
 
   @override
@@ -126,16 +125,17 @@ class RankBarPainter extends CustomPainter {
 class TimerBarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()..color = Colors.yellow;
+    final Paint paint = Paint()..color = const Color(0xfff6f025);
 
     final Path path = Path()
-      ..relativeLineTo(60, size.height)
-      // ..relativeQuadraticBezierTo(-15, 0, 15, 0)
-      ..lineTo(size.width * 0.8, size.height)
-      // ..relativeQuadraticBezierTo(15, 0, 30, -15)
-      ..relativeLineTo(60, -size.height)
+      ..relativeLineTo(50, size.height - 10)
+      ..relativeQuadraticBezierTo(10, 10, 20, 10)
+      ..lineTo(size.width * 0.8 - 10, size.height)
+      ..relativeQuadraticBezierTo(10, 0, 20, -10)
+      ..relativeLineTo(60, -size.height + 10)
       ..close();
 
+    canvas.drawShadow(path, Colors.black, 7.5, false);
     canvas.drawPath(path, paint);
   }
 
@@ -147,16 +147,17 @@ class TimerBarPainter extends CustomPainter {
 class GameBarPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()..color = const Color(0xff8eb6de);
+    final Paint paint = Paint()..color = const Color(0xff88b8e2);
 
     final Path path = Path()
       ..moveTo(60, 0)
-      ..lineTo(0, size.height)
-      // ..relativeQuadraticBezierTo(0, -15, 15, 0)
+      ..lineTo(10, size.height - 10)
+      ..relativeQuadraticBezierTo(-10, 10, 10, 10)
       ..lineTo(size.width, size.height)
       ..lineTo(size.width, 0)
       ..close();
 
+    canvas.drawShadow(path, Colors.black, 7.5, false);
     canvas.drawPath(path, paint);
   }
 

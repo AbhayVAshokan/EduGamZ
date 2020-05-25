@@ -1,5 +1,5 @@
-import 'dart:async';
-
+import 'package:edugamz/screens/answer_animation.dart';
+import 'package:edugamz/screens/game_fill_container.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/game/top_bar.dart';
@@ -15,75 +15,61 @@ class GameMoreThanOne extends StatefulWidget {
   _GameMoreThanOneState createState() => _GameMoreThanOneState();
 }
 
-class _GameMoreThanOneState extends State<GameMoreThanOne>
-    with TickerProviderStateMixin {
-  List<AnimationController> animationController = [];
-  List<Animation> animation = [];
-  List<bool> isSelected = [];
+class _GameMoreThanOneState extends State<GameMoreThanOne> {
+  int chances = 2;
+  List<Color> _borderColor = [];
+  List<bool> _selected = [];
 
   @override
   initState() {
     super.initState();
 
     for (int i = 0; i < widget.question.options.length; i++) {
-      animationController.add(
-        AnimationController(
-          vsync: this,
-          duration: const Duration(milliseconds: 250),
-        ),
-      );
-
-      animation.add(ColorTween(begin: Colors.white, end: Colors.yellow)
-          .animate(animationController[i]));
-
-      isSelected.add(false);
+      _borderColor.add(Colors.black);
+      _selected.add(false);
     }
   }
 
   Widget moreThanOneOption({
     @required int index,
-    @required Animation animation,
+    @required MediaQueryData mediaQuery,
     @required Map<String, dynamic> option,
-    @required AnimationController animationController,
   }) {
-    return AnimatedBuilder(
-      animation: animation,
-      builder: (ctx, child) => GestureDetector(
-        onTap: () {
-          if (animation.value == Colors.white) {
-            animationController.forward();
-            isSelected[index] = true;
-          } else {
-            animationController.reverse();
-            isSelected[index] = true;
-          }
-        },
-        child: Container(
-          width: 100.0,
-          height: 95,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 5.0,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selected[index] = !_selected[index];
+          _borderColor[index] = _selected[index] ? Colors.amber : Colors.black;
+        });
+      },
+      child: Container(
+        width: mediaQuery.size.width * 0.15,
+        height: mediaQuery.size.height * 0.25,
+        margin: EdgeInsets.symmetric(
+          horizontal: mediaQuery.size.width * 0.01,
+          vertical: 5.0,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: _borderColor[index],
+            width: 1.5,
           ),
-          decoration: BoxDecoration(
-            color: animation.value,
-            border: Border.all(),
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              Expanded(
-                child: Image.asset(option['image']),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Expanded(
+              child: Image.asset(option['image']),
+            ),
+            Text(
+              option['text'],
+              style: const TextStyle(
+                fontSize: 18.0,
               ),
-              Text(
-                option['text'],
-                style: const TextStyle(
-                  fontSize: 18.0,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -118,51 +104,59 @@ class _GameMoreThanOneState extends State<GameMoreThanOne>
                                   i++)
                                 moreThanOneOption(
                                   index: i,
-                                  animation: animation[i],
+                                  mediaQuery: mediaQuery,
                                   option: widget.question.options[i],
-                                  animationController: animationController[i],
                                 ),
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Timer(
-                              const Duration(seconds: 1),
-                              () => Navigator.pushReplacementNamed(
-                                  context, '/gameFillContainer'),
-                            );
-                            setState(() {
-                              for (int i = 0;
-                                  i < widget.question.options.length;
-                                  i++) {
-                                if (isSelected[i]) {
-                                  if (widget.question.options[i]['correct'] ==
-                                      true) {
-                                    animation[i] = ColorTween(
-                                            begin: Colors.yellow,
-                                            end: Colors.green)
-                                        .animate(animationController[i]);
-                                    animationController[i].forward();
-                                  } else {
-                                    animation[i] = ColorTween(
-                                            begin: Colors.yellow,
-                                            end: Colors.red)
-                                        .animate(animationController[i]);
-                                    animationController[i].forward();
+                        Container(
+                          alignment: Alignment.bottomRight,
+                          width: MediaQuery.of(context).size.width * 0.75,
+                          padding: EdgeInsets.only(
+                            top: 10,
+                            bottom: 50.0,
+                            right: 10.0,
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                bool correctAnswer = true;
+
+                                chances -= 1;
+
+                                for (int i = 0;
+                                    i < widget.question.options.length;
+                                    i++) {
+                                  if ((_selected[i] &&
+                                          !widget.question.options[i]
+                                              ['correct']) ||
+                                      (!_selected[i] &&
+                                          widget.question.options[i]
+                                              ['correct']))
+                                    correctAnswer = false;
+
+                                  if (_selected[i]) {
+                                    if (widget.question.options[i]['correct'])
+                                      _borderColor[i] = Colors.green;
+                                    else
+                                      _borderColor[i] = Colors.red;
                                   }
                                 }
-                              }
-                            });
-                          },
-                          child: Container(
-                            alignment: Alignment.bottomRight,
-                            width: MediaQuery.of(context).size.width * 0.75,
-                            padding: EdgeInsets.only(
-                              top: 10,
-                              bottom: 50.0,
-                              right: 10.0,
-                            ),
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AnswerAnimation(
+                                      correct: correctAnswer,
+                                      nextScreen:
+                                          (correctAnswer || chances <= 0)
+                                              ? GameFillContainer()
+                                              : null,
+                                    ),
+                                  ),
+                                );
+                              });
+                            },
                             child: Container(
                               height: 50.0,
                               width: 50.0,

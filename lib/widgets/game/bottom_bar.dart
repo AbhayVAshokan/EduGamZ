@@ -7,66 +7,80 @@ import 'package:flutter/material.dart';
 import '../game/show_leaderboard.dart';
 
 class BottomBar extends StatelessWidget {
+  final bool resultScreen;
+  BottomBar({this.resultScreen});
+
   @override
   Widget build(BuildContext context) {
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+
     return Positioned(
       bottom: 0.0,
       child: SizedBox(
+        height: mediaQuery.size.height * 0.15,
         width: MediaQuery.of(context).size.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: CustomPaint(
-                child: Container(
-                  height: 80.0,
-                  padding: const EdgeInsets.all(5.0),
-                  alignment: Alignment.bottomLeft,
-                  child: Image.asset(
-                    'assets/images/quiz/quit.png',
-                    width: 45.0,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                painter: CloseButton(),
-              ),
-            ),
-            GestureDetector(
-              onVerticalDragEnd: (details) {
-                if (details.primaryVelocity < -200)
-                  showLeaderBoard(
-                    context: context,
-                  );
-              },
-              child: CustomPaint(
-                child: Container(
-                  height: 75.0,
-                  alignment: Alignment.center,
-                  child: Transform.rotate(
-                    angle: -pi / 2,
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 25.0,
-                      color: Colors.blueGrey,
+              child: FittedBox(
+                child: CustomPaint(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 5.0,
+                      bottom: 5.0,
+                    ),
+                    child: Image.asset(
+                      'assets/images/quiz/quit.png',
+                      fit: BoxFit.contain,
+                      width: mediaQuery.size.height * 0.15,
                     ),
                   ),
+                  painter: CloseButton(),
                 ),
-                painter: BottomDrawer(),
               ),
             ),
-            CustomPaint(
-              child: Container(
-                height: 80.0,
-                padding: const EdgeInsets.all(5.0),
-                alignment: Alignment.bottomRight,
-                child: Image.asset(
-                  'assets/images/quiz/coin.png',
-                  width: 55.0,
-                  fit: BoxFit.contain,
+            SizedBox(
+              height: mediaQuery.size.height * 0.15,
+              child: GestureDetector(
+                onVerticalDragEnd: (details) {
+                  if (details.primaryVelocity < -200)
+                    showLeaderBoard(
+                      context: context,
+                    );
+                },
+                child: CustomPaint(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: Transform.rotate(
+                      angle: -pi / 2,
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 25.0,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
+                  painter: BottomDrawer(),
                 ),
               ),
-              painter: CoinButton(),
+            ),
+            FittedBox(
+              child: CustomPaint(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 5.0,
+                    bottom: 5.0,
+                  ),
+                  child: Image.asset(
+                    'assets/images/quiz/coin.png',
+                    fit: BoxFit.contain,
+                    width: mediaQuery.size.height * 0.15,
+                  ),
+                ),
+                painter: CoinButton(),
+              ),
             ),
           ],
         ),
@@ -80,11 +94,10 @@ class CloseButton extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()..color = const Color(0xffa1e3db);
-    Offset center = Offset(0, size.height);
+    Offset center = Offset(size.width * 0.25, size.height * 0.75);
     canvas.drawCircle(center, 80.0, paint);
 
     paint = Paint()..color = const Color(0xff73cbc2);
-    center = Offset(0, size.height);
     canvas.drawCircle(center, 65.0, paint);
   }
 
@@ -97,11 +110,10 @@ class CoinButton extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()..color = const Color(0xff9fe3dc);
-    Offset center = Offset(size.width, size.height);
+    Offset center = Offset(size.width * 0.75, size.height * 0.75);
     canvas.drawCircle(center, 80.0, paint);
 
     paint = Paint()..color = const Color(0xff73cbc2);
-    center = Offset(size.width, size.height);
     canvas.drawCircle(center, 65.0, paint);
   }
 
@@ -109,17 +121,17 @@ class CoinButton extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
 
-// Bottom drawer custom paint
+// Chat drawer custom paint
 class BottomDrawer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()..color = const Color(0xffb9e2df);
-    Offset center = Offset(size.width / 2, 200);
-    canvas.drawCircle(center, 150, paint);
+    Offset center = Offset(size.width / 2, size.height * 3.5);
+    canvas.drawCircle(center, size.height * 3, paint);
 
     paint.color = const Color(0xff59b8b5);
-    center = Offset(size.width / 2, 62.0);
-    canvas.drawCircle(center, 10.0, paint);
+    center = Offset(size.width / 2, size.height * 0.75);
+    canvas.drawCircle(center, 7.5, paint);
   }
 
   @override

@@ -8,7 +8,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Color _fadeColor = Colors.black;
+  Color _fadeColor = Colors.white;
 
   @override
   void initState() {

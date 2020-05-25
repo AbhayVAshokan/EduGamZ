@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../screens/game_mcq.dart';
-import '../resources/realtime_data.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -13,22 +12,41 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _CountDownState extends State<LoadingScreen> {
+  double _opacity2 = 1.0, _opacity3 = 1.0;
+
   @override
   void initState() {
     Timer(
       const Duration(
-        seconds: 2,
-        milliseconds: 500,
+        seconds: 3,
       ),
       () => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => GameMCQ(
-            question: mcqQuestions[0],
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              FadeTransition(
+            opacity: Tween(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(animation),
+            child: GameMCQ(),
           ),
-        )
+          transitionDuration: const Duration(microseconds: 1),
+        ),
       ),
     );
+
+    Timer(const Duration(seconds: 1), () {
+      setState(() {
+        _opacity3 = 0;
+      });
+    });
+
+    Timer(const Duration(seconds: 2), () {
+      setState(() {
+        _opacity2 = 0;
+      });
+    });
 
     super.initState();
   }
@@ -39,29 +57,87 @@ class _CountDownState extends State<LoadingScreen> {
 
     return SafeArea(
       child: Scaffold(
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xffc3e7dd),
-                    Colors.white,
-                    Colors.white,
-                    Color(0xffc3e7dd),
-                  ],
-                ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Starting in...',
+                style: const TextStyle(fontSize: 22.0),
               ),
-            ),
-            Image.asset(
-              'assets/images/hourglass.gif',
-              width: mediaQuery.size.width * 0.3,
-              height: mediaQuery.size.width * 0.3,
-            ),
-          ],
+              SizedBox(height: mediaQuery.size.height * 0.05),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: mediaQuery.size.height * 0.4,
+                    height: mediaQuery.size.height * 0.4,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow.withOpacity(0.75),
+                      shape: BoxShape.circle,
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: const Text(
+                        '1',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 75.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  AnimatedOpacity(
+                    duration: const Duration(microseconds: 0),
+                    opacity: _opacity2,
+                    child: Container(
+                      width: mediaQuery.size.height * 0.4,
+                      height: mediaQuery.size.height * 0.4,
+                      margin: const EdgeInsets.only(top: 20.0),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[400],
+                        shape: BoxShape.circle,
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: const Text(
+                          '2',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 75.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  AnimatedOpacity(
+                    duration: const Duration(microseconds: 0),
+                    opacity: _opacity3,
+                    child: Container(
+                      width: mediaQuery.size.height * 0.4,
+                      height: mediaQuery.size.height * 0.4,
+                      margin: const EdgeInsets.only(bottom: 20.0),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[400],
+                        shape: BoxShape.circle,
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: const Text(
+                          '3',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 75.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

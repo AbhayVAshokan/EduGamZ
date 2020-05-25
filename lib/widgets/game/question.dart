@@ -8,8 +8,10 @@ class Question extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+
     return Container(
-      height: 50.0,
+      height: mediaQuery.size.height * 0.12,
       width: MediaQuery.of(context).size.width * 0.75,
       padding: const EdgeInsets.symmetric(
         vertical: 10.0,
@@ -17,7 +19,7 @@ class Question extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
-        color: Colors.yellow,
+        color: const Color(0xfffbff42),
       ),
       child: FittedBox(
         fit: BoxFit.scaleDown,
@@ -25,6 +27,7 @@ class Question extends StatelessWidget {
           question,
           style: const TextStyle(
             fontSize: 20.0,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
