@@ -13,13 +13,14 @@ class Question extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.75,
       padding: const EdgeInsets.symmetric(
         vertical: 10.0,
-        horizontal: 20.0,
+        horizontal: 50.0,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
         color: Colors.yellow,
       ),
       child: FittedBox(
+        fit: BoxFit.scaleDown,
         child: Text(
           question,
           style: const TextStyle(

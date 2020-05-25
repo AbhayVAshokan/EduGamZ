@@ -11,27 +11,27 @@ import '../models/game/more_than_one_correct.dart';
 List<Themes> dummyThemes = [
   Themes(
     name: 'Day at School',
-    color: const Color(0xfff3b4b6),
+    color: const Color(0xfff8b2b2),
     image: 'assets/images/themes/school.png',
   ),
   Themes(
     name: 'Visit to the Zoo',
-    color: const Color(0xffa9ada7),
+    color: const Color(0xffabaea5),
     image: 'assets/images/themes/zoo.png',
   ),
   Themes(
     name: 'Treasure Hunt',
-    color: const Color(0xfff0bd8f),
+    color: const Color(0xfff5bc86),
     image: 'assets/images/themes/treasure.png',
   ),
   Themes(
     name: 'Making Mac n Cheese',
-    color: const Color(0xfffaf8b4),
+    color: const Color(0xfffcf9ab),
     image: 'assets/images/themes/chef.png',
   ),
   Themes(
     name: 'Project Day',
-    color: const Color(0xffc1f3d7),
+    color: const Color(0xffbdf6d5),
     image: 'assets/images/themes/project.png',
   ),
   Themes(
@@ -65,27 +65,27 @@ List<MoreThanOneCorrect> dummyMoreThanOneCorrect = [
     options: [
       {
         'text': 'Frog',
-        'image': 'assets/images/quiz_more_than_one/frog.png',
+        'image': 'assets/images/quiz/quiz_more_than_one/frog.png',
         'correct': true,
       },
       {
         'text': 'Fish',
-        'image': 'assets/images/quiz_more_than_one/fish.png',
+        'image': 'assets/images/quiz/quiz_more_than_one/fish.png',
         'correct': true,
       },
       {
         'text': 'Butterfly',
-        'image': 'assets/images/quiz_more_than_one/butterfly.png',
+        'image': 'assets/images/quiz/quiz_more_than_one/butterfly.png',
         'correct': false,
       },
       {
         'text': 'Crab',
-        'image': 'assets/images/quiz_more_than_one/crab.png',
+        'image': 'assets/images/quiz/quiz_more_than_one/crab.png',
         'correct': true,
       },
       {
         'text': 'Pig',
-        'image': 'assets/images/quiz_more_than_one/pig.png',
+        'image': 'assets/images/quiz/quiz_more_than_one/pig.png',
         'correct': false,
       },
     ],

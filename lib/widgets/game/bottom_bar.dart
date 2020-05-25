@@ -4,6 +4,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../game/show_leaderboard.dart';
+
 class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class BottomBar extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   alignment: Alignment.bottomLeft,
                   child: Image.asset(
-                    'assets/images/quit.png',
+                    'assets/images/quiz/quit.png',
                     width: 45.0,
                     fit: BoxFit.contain,
                   ),
@@ -30,20 +32,28 @@ class BottomBar extends StatelessWidget {
                 painter: CloseButton(),
               ),
             ),
-            CustomPaint(
-              child: Container(
-                height: 75.0,
-                alignment: Alignment.center,
-                child: Transform.rotate(
-                  angle: -pi / 2,
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 25.0,
-                    color: Colors.blueGrey,
+            GestureDetector(
+              onVerticalDragEnd: (details) {
+                if (details.primaryVelocity < -200)
+                  showLeaderBoard(
+                    context: context,
+                  );
+              },
+              child: CustomPaint(
+                child: Container(
+                  height: 75.0,
+                  alignment: Alignment.center,
+                  child: Transform.rotate(
+                    angle: -pi / 2,
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 25.0,
+                      color: Colors.blueGrey,
+                    ),
                   ),
                 ),
+                painter: BottomDrawer(),
               ),
-              painter: BottomDrawer(),
             ),
             CustomPaint(
               child: Container(
@@ -51,7 +61,7 @@ class BottomBar extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 alignment: Alignment.bottomRight,
                 child: Image.asset(
-                  'assets/images/coin.png',
+                  'assets/images/quiz/coin.png',
                   width: 55.0,
                   fit: BoxFit.contain,
                 ),

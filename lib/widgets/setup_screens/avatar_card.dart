@@ -75,7 +75,7 @@ class _AvatarCardState extends State<AvatarCard> with TickerProviderStateMixin {
               image: DecorationImage(
                 fit: BoxFit.contain,
                 image: AssetImage(
-                  widget.avatar.imageUrl,
+                  widget.avatar.image,
                 ),
               ),
             ),

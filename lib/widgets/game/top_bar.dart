@@ -1,10 +1,21 @@
 // Display the top bar containing game stats.
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    showComingSoon() {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: Text('Coming Soon'),
+        ),
+        barrierDismissible: true,
+      );
+    }
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -12,20 +23,23 @@ class TopBar extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: CustomPaint(
-              painter: RankBarPainter(),
-              child: Container(
-                height: 60.0,
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    'Rank: 4/10',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple,
+            child: GestureDetector(
+              onTap: showComingSoon,
+              child: CustomPaint(
+                painter: RankBarPainter(),
+                child: Container(
+                  height: 60.0,
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'Rank: 4/10',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepPurple,
+                      ),
                     ),
                   ),
                 ),
@@ -56,25 +70,28 @@ class TopBar extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Center(
-              child: CustomPaint(
-                child: Container(
-                  height: 60.0,
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      'Game 1/15',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[900],
+            child: GestureDetector(
+              onTap: showComingSoon,
+              child: Center(
+                child: CustomPaint(
+                  child: Container(
+                    height: 60.0,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'Game 1/15',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue[900],
+                        ),
                       ),
                     ),
                   ),
+                  painter: GameBarPainter(),
                 ),
-                painter: GameBarPainter(),
               ),
             ),
           ),
