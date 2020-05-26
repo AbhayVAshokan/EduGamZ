@@ -34,23 +34,43 @@ class GameFillContainerState extends State<GameFillContainer> {
                       children: [
                         Expanded(
                           child: Center(
-                            child: Container(
-                              height: mediaQuery.size.height * 0.9,
-                              width: mediaQuery.size.width,
-                              padding: const EdgeInsets.all(30.0),
-                              decoration: BoxDecoration(
-                                color: Colors.yellow,
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                question,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  letterSpacing: 0.5,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: LayoutBuilder(
+                                    builder: (context, constraints) =>
+                                        Container(
+                                      height: mediaQuery.size.height * 0.9,
+                                      width: mediaQuery.size.width,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 30.0,
+                                        vertical: 20.0,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow,
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        question,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: constraints.maxHeight < 150
+                                              ? 12.0
+                                              : 15.0,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -65,14 +85,6 @@ class GameFillContainerState extends State<GameFillContainer> {
             ),
             BottomBar(),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Clear Screen',
-          child: Icon(
-            Icons.refresh,
-          ),
-          backgroundColor: Theme.of(context).primaryColor,
         ),
       ),
     );

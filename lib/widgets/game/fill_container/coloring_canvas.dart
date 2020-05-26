@@ -3,6 +3,8 @@
 import 'dart:ui';
 import 'dart:async';
 
+import 'package:edugamz/resources/dummy_data.dart';
+import 'package:edugamz/screens/game_circle_answer.dart';
 import 'package:flutter/material.dart';
 
 class ColoringCanvas extends StatefulWidget {
@@ -31,9 +33,13 @@ class _ColoringCanvasState extends State<ColoringCanvas> {
         onPanEnd: (DragEndDetails details) {
           Timer(
             const Duration(seconds: 1),
-            () => Navigator.pushReplacementNamed(
+            () => Navigator.pushReplacement(
               context,
-              '/gameCircleAnswer',
+              MaterialPageRoute(
+                builder: (context) => GameCircleAnswer(
+                  question: dummyMoreThanOneCorrect[1],
+                ),
+              ),
             ),
           );
           points.add(null);

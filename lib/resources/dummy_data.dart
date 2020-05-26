@@ -53,9 +53,23 @@ List<MCQ> dummyMcqQuestions = [
 // List of all dummy Match-the-following questions
 List<MatchTheFollowing> dummyMatchTheFollowingQuestions = [
   MatchTheFollowing(
-      question: 'Match the profession with their tool',
-      texts: ['Fisherman', 'Doctor', 'Mechanic'],
-      images: null)
+    question: 'Match the profession with their tool',
+    texts: ['Fisherman', 'Doctor', 'Mechanic'],
+    images: [
+      {
+        'text': 'Fisherman',
+        'image': 'assets/images/quiz/profession/fishing_net.png',
+      },
+      {
+        'text': 'Doctor',
+        'image': 'assets/images/quiz/profession/stethosope.png',
+      },
+      {
+        'text': 'Mechanic',
+        'image': 'assets/images/quiz/profession/mechanic.png',
+      },
+    ],
+  )
 ];
 
 // List of all dummy More-than-one-correct answer type questions.
@@ -65,29 +79,64 @@ List<MoreThanOneCorrect> dummyMoreThanOneCorrect = [
     options: [
       {
         'text': 'Frog',
-        'image': 'assets/images/quiz/quiz_more_than_one/frog.png',
+        'image': 'assets/images/quiz/aquatic_animals/frog.png',
         'correct': true,
       },
       {
         'text': 'Fish',
-        'image': 'assets/images/quiz/quiz_more_than_one/fish.png',
+        'image': 'assets/images/quiz/aquatic_animals/fish.png',
         'correct': true,
       },
       {
         'text': 'Butterfly',
-        'image': 'assets/images/quiz/quiz_more_than_one/butterfly.png',
+        'image': 'assets/images/quiz/aquatic_animals/butterfly.png',
         'correct': false,
       },
       {
         'text': 'Crab',
-        'image': 'assets/images/quiz/quiz_more_than_one/crab.png',
+        'image': 'assets/images/quiz/aquatic_animals/crab.png',
         'correct': true,
       },
       {
         'text': 'Pig',
-        'image': 'assets/images/quiz/quiz_more_than_one/pig.png',
+        'image': 'assets/images/quiz/aquatic_animals/pig.png',
         'correct': false,
       },
     ],
-  )
+  ),
+  MoreThanOneCorrect(
+    question: 'Select all the things you need to go to the supermarket.',
+    options: [
+      {
+        'text': 'Money',
+        'image': 'assets/images/quiz/supermarket/cash.png',
+        'correct': true,
+      },
+      {
+        'text': 'Popcorn',
+        'image': 'assets/images/quiz/supermarket/popcorn.png',
+        'correct': false,
+      },
+      {
+        'text': 'Racquet',
+        'image': 'assets/images/quiz/supermarket/racquet.png',
+        'correct': false,
+      },
+      {
+        'text': 'List',
+        'image': 'assets/images/quiz/supermarket/shopping_list.png',
+        'correct': true,
+      },
+      {
+        'text': 'Coat',
+        'image': 'assets/images/quiz/supermarket/safety_jacket.png',
+        'correct': false,
+      },
+      {
+        'text': 'Bag',
+        'image': 'assets/images/quiz/supermarket/shopping_bag.png',
+        'correct': true,
+      },
+    ],
+  ),
 ];

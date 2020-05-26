@@ -4,15 +4,21 @@ import './coloring_canvas.dart';
 
 class Beaker extends StatelessWidget {
   Widget build(BuildContext context) {
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+    final double _imageHeight = mediaQuery.size.height * 0.6;
+
     return LayoutBuilder(
       builder: (context, constraints) => Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset('assets/images/quiz/beaker.png',
-              fit: BoxFit.contain, height: 225),
+          Image.asset(
+            'assets/images/quiz/beaker.png',
+            fit: BoxFit.contain,
+            height: _imageHeight,
+          ),
           Container(
-            width: 215.714285714,
-            height: 225,
+            width: _imageHeight,
+            height: _imageHeight,
             alignment: Alignment.bottomRight,
             padding: const EdgeInsets.only(
               bottom: 10,
@@ -20,7 +26,7 @@ class Beaker extends StatelessWidget {
             child: FittedBox(
               fit: BoxFit.scaleDown,
               child: SizedBox(
-                height: 225 * 25 / 29,
+                height: _imageHeight * 25 / 29,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

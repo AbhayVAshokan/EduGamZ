@@ -17,7 +17,7 @@ class BottomBar extends StatelessWidget {
     return Positioned(
       bottom: 0.0,
       child: SizedBox(
-        height: mediaQuery.size.height * 0.15,
+        height: mediaQuery.size.height * 0.12,
         width: MediaQuery.of(context).size.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,6 +35,7 @@ class BottomBar extends StatelessWidget {
                       'assets/images/quiz/quit.png',
                       fit: BoxFit.contain,
                       width: mediaQuery.size.height * 0.15,
+                      height: mediaQuery.size.height * 0.15,
                     ),
                   ),
                   painter: CloseButton(),
@@ -77,6 +78,7 @@ class BottomBar extends StatelessWidget {
                     'assets/images/quiz/coin.png',
                     fit: BoxFit.contain,
                     width: mediaQuery.size.height * 0.15,
+                    height: mediaQuery.size.height * 0.15,
                   ),
                 ),
                 painter: CoinButton(),

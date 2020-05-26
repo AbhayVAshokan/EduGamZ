@@ -43,7 +43,7 @@ class _GameMoreThanOneState extends State<GameMoreThanOne> {
         });
       },
       child: Container(
-        width: mediaQuery.size.width * 0.15,
+        width: mediaQuery.size.width * 0.14,
         height: mediaQuery.size.height * 0.25,
         margin: EdgeInsets.symmetric(
           horizontal: mediaQuery.size.width * 0.01,
@@ -142,6 +142,8 @@ class _GameMoreThanOneState extends State<GameMoreThanOne> {
                                     else
                                       _borderColor[i] = Colors.red;
                                   }
+
+                                  _borderColor[i] = Colors.black;
                                 }
                                 Navigator.push(
                                   context,
@@ -158,15 +160,15 @@ class _GameMoreThanOneState extends State<GameMoreThanOne> {
                               });
                             },
                             child: Container(
-                              height: 50.0,
-                              width: 50.0,
+                              height: 40.0,
+                              width: 40.0,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Theme.of(context).primaryColor,
                               ),
                               child: Icon(
                                 Icons.check,
-                                size: 30.0,
+                                size: 25.0,
                                 color: Colors.white,
                               ),
                             ),

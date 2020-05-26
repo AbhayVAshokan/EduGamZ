@@ -11,7 +11,6 @@ import './screens/splash_screen.dart';
 import './screens/loading_screen.dart';
 import './screens/welcome_screen.dart';
 import './screens/category_screen.dart';
-import './screens/game_circle_answer.dart';
 import './screens/game_fill_container.dart';
 import './resources/screen_transitions.dart';
 
@@ -82,11 +81,6 @@ class EduGamZ extends StatelessWidget {
           case '/gameFillContainer':
             screen = fadeTransition(
               screen: GameFillContainer(),
-            );
-            break;
-          case '/gameCircleAnswer':
-            screen = fadeTransition(
-              screen: GameCircleAnswer(),
             );
             break;
 

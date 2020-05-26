@@ -50,7 +50,9 @@ flutter:
     - assets/images/quiz/
     - assets/images/themes/
     - assets/images/avatars/
-    - assets/images/quiz/quiz_more_than_one/
+    - assets/images/quiz/profession/
+    - assets/images/quiz/supermarket/
+    - assets/images/quiz/aquatic_animals/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
