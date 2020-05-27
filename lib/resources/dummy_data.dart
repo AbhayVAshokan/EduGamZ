@@ -62,7 +62,7 @@ List<MatchTheFollowing> dummyMatchTheFollowingQuestions = [
       },
       {
         'text': 'Doctor',
-        'image': 'assets/images/quiz/profession/stethosope.png',
+        'image': 'assets/images/quiz/profession/stethoscope.png',
       },
       {
         'text': 'Mechanic',

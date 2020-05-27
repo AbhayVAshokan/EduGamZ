@@ -1,10 +1,10 @@
-import 'package:edugamz/screens/answer_animation.dart';
-import 'package:edugamz/screens/game_fill_container.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/game/top_bar.dart';
 import '../widgets/game/question.dart';
 import '../widgets/game/bottom_bar.dart';
+import '../screens/answer_animation.dart';
+import '../screens/game_fill_container.dart';
 import '../models/game/more_than_one_correct.dart';
 
 class GameMoreThanOne extends StatefulWidget {
@@ -63,10 +63,12 @@ class _GameMoreThanOneState extends State<GameMoreThanOne> {
             Expanded(
               child: Image.asset(option['image']),
             ),
-            Text(
-              option['text'],
-              style: const TextStyle(
-                fontSize: 18.0,
+            FittedBox(
+              child: Text(
+                option['text'],
+                style: const TextStyle(
+                  fontSize: 18.0,
+                ),
               ),
             ),
           ],
