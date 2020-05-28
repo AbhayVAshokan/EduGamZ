@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class MatchingCanvas extends CustomPainter {
+class MatchingPainter extends CustomPainter {
   final BuildContext context;
   final List<Offset> points;
   final List<List<Offset>> permanentLine;
 
-  MatchingCanvas({
+  MatchingPainter({
     @required this.context,
     @required this.points,
     @required this.permanentLine,
@@ -30,13 +30,15 @@ class MatchingCanvas extends CustomPainter {
       }
     }
 
-    paint..color = Colors.amber..strokeWidth = 1.5;
+    paint
+      ..color = Colors.amber
+      ..strokeWidth = 1.5;
     for (int i = 0; i < points.length - 1; i++)
       canvas.drawLine(points[i], points[i + 1], paint);
   }
 
   @override
-  bool shouldRepaint(MatchingCanvas oldDelegate) {
+  bool shouldRepaint(MatchingPainter oldDelegate) {
     return oldDelegate.points != points;
   }
 }

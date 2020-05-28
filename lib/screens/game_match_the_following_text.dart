@@ -2,15 +2,21 @@
 
 import 'package:flutter/material.dart';
 
+import './game_audio.dart';
+import './answer_animation.dart';
 import '../widgets/game/top_bar.dart';
+import '../resources/dummy_data.dart';
 import '../widgets/game/question.dart';
 import '../widgets/game/bottom_bar.dart';
 import '../models/game/match_the_following.dart';
-import '../widgets/game/match_the_following_text/matching_canvas.dart';
+import '../widgets/game/match_the_following_text/matching_painter.dart';
 
 class GameMatchTheFollowingText extends StatefulWidget {
   final MatchTheFollowing question;
-  GameMatchTheFollowingText({@required this.question});
+
+  GameMatchTheFollowingText({
+    @required this.question,
+  });
 
   @override
   _GameMatchTheFollowingTextState createState() =>
@@ -23,6 +29,7 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
   final GlobalKey _canvasKey = GlobalKey();
 
   List<Offset> points = [];
+  List<Map<String, int>> completed = [];
   List<List<Offset>> permanentLines = [];
 
   Offset panEndPosition;
@@ -32,9 +39,9 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
   double _imageWidth;
   double _imageHeight;
 
+  int firstValue;
   Offset sourcePoint;
   Offset destinationPoint;
-  int firstValue;
 
   @override
   void initState() {
@@ -42,8 +49,8 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
       _textKey.add(GlobalKey());
       _imageKey.add(GlobalKey());
       permanentLines.add([]);
+      completed.add(null);
     }
-
     super.initState();
   }
 
@@ -179,6 +186,8 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
                   }
                 },
                 onPanEnd: (DragEndDetails details) {
+                  int endPoint;
+
                   for (int i = 0; i < widget.question.images.length; i++) {
                     final RenderBox renderBox =
                         _imageKey[i].currentContext.findRenderObject();
@@ -194,8 +203,10 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
                     final bool bottomBound = panEndPosition.dy >=
                         _imagePosition.dy - _imageHeight - 5;
 
-                    if (leftBound && rightBound && topBound && bottomBound)
+                    if (leftBound && rightBound && topBound && bottomBound) {
                       destinationPoint = panEndPosition;
+                      endPoint = i;
+                    }
                   }
                   setState(() {
                     if (sourcePoint != null && destinationPoint != null) {
@@ -203,8 +214,46 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
                         sourcePoint,
                         destinationPoint
                       ];
+                      completed[firstValue] = {
+                        'source': firstValue,
+                        'destination': endPoint,
+                      };
                     }
                   });
+
+                  // Checking the results
+                  bool correct = true;
+                  bool allAttempted = true;
+                  for (int i = 0; i < completed.length; i++) {
+                    if (completed[i] == null) {
+                      allAttempted = false;
+                      break;
+                    }
+
+                    final int imageIndex = widget.question.images.indexWhere(
+                      (element) => element['text'] == widget.question.texts[i],
+                    );
+
+                    if (imageIndex != completed[i]['destination']) {
+                      correct = false;
+                    }
+                  }
+                  if (allAttempted &&
+                      sourcePoint != null &&
+                      destinationPoint != null)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AnswerAnimation(
+                          correct: correct,
+                          nextScreen: correct
+                              ? GameAudio(
+                                  question: dummyAudioGames[0],
+                                )
+                              : null,
+                        ),
+                      ),
+                    );
                 },
                 onPanUpdate: (DragUpdateDetails details) {
                   setState(() {
@@ -216,7 +265,7 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
                   });
                 },
                 child: CustomPaint(
-                  painter: MatchingCanvas(
+                  painter: MatchingPainter(
                     context: context,
                     points: points,
                     permanentLine: permanentLines,

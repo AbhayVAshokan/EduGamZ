@@ -8,6 +8,14 @@ import 'package:edugamz/screens/game_circle_answer.dart';
 import 'package:flutter/material.dart';
 
 class ColoringCanvas extends StatefulWidget {
+  final double imageHeight;
+  final double imageWidth;
+
+  ColoringCanvas({
+    @required this.imageHeight,
+    @required this.imageWidth,
+  });
+
   @override
   _ColoringCanvasState createState() => _ColoringCanvasState();
 }
@@ -47,8 +55,8 @@ class _ColoringCanvasState extends State<ColoringCanvas> {
         child: CustomPaint(
           painter: BeakerCanvas(context: context),
           child: Container(
-            height: 225,
-            width: 160.714285714,
+            height: widget.imageHeight,
+            width: widget.imageWidth,
           ),
         ),
       ),

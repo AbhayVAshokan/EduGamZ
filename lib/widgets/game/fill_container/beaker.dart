@@ -43,7 +43,10 @@ class Beaker extends StatelessWidget {
               ),
             ),
           ),
-          ColoringCanvas(),
+          ColoringCanvas(
+            imageHeight: _imageHeight,
+            imageWidth: _imageHeight * 41 / 58,
+          ),
         ],
       ),
     );

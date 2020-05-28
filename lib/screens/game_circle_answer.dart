@@ -1,6 +1,7 @@
 // Circle all the correct answers
 
 import 'package:edugamz/resources/dummy_data.dart';
+import 'package:edugamz/screens/answer_animation.dart';
 import 'package:edugamz/screens/game_match_the_following_text.dart';
 import 'package:flutter/material.dart';
 
@@ -72,22 +73,6 @@ class _GameCircleAnswerState extends State<GameCircleAnswer> {
 
                                         _selected[i] = !_selected[i];
                                       });
-
-                                      if (_selected
-                                              .where((element) => element)
-                                              .length >=
-                                          3)
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                GameMatchTheFollowingText(
-                                              question:
-                                                  dummyMatchTheFollowingQuestions[
-                                                      0],
-                                            ),
-                                          ),
-                                        );
                                     },
                                     child: AnimatedContainer(
                                       duration:
@@ -127,6 +112,47 @@ class _GameCircleAnswerState extends State<GameCircleAnswer> {
                   ),
                 ),
               ],
+            ),
+            Positioned(
+              bottom: mediaQuery.size.height * 0.05,
+              right: mediaQuery.size.width * 0.1,
+              child: GestureDetector(
+                onTap: () {
+                  bool correct = true;
+
+                  for (int i = 0; i < widget.question.options.length; i++) {
+                    if (widget.question.options[i]['correct'] != _selected[i])
+                      correct = false;
+                  }
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AnswerAnimation(
+                        correct: correct,
+                        nextScreen: correct
+                            ? GameMatchTheFollowingText(
+                                question: dummyMatchTheFollowingQuestions[0],
+                              )
+                            : null,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 40.0,
+                  width: 40.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  child: Icon(
+                    Icons.check,
+                    size: 25.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
             BottomBar(),
           ],

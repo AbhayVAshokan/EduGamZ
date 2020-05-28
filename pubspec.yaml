@@ -23,6 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  auto_size_text: ^2.1.0
+  speech_recognition: ^0.3.0+1
+  permission_handler: ^5.0.0+hotfix.6
 
 
   # The following adds the Cupertino Icons font to your application.

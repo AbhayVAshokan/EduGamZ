@@ -1,5 +1,6 @@
 // All the dummy data are listed in this file till the backend is functional.
 
+import 'package:edugamz/models/game/audio_game.dart';
 import 'package:flutter/material.dart';
 
 import '../models/themes.dart';
@@ -57,12 +58,12 @@ List<MatchTheFollowing> dummyMatchTheFollowingQuestions = [
     texts: ['Fisherman', 'Doctor', 'Mechanic'],
     images: [
       {
-        'text': 'Fisherman',
-        'image': 'assets/images/quiz/profession/fishing_net.png',
-      },
-      {
         'text': 'Doctor',
         'image': 'assets/images/quiz/profession/stethoscope.png',
+      },
+      {
+        'text': 'Fisherman',
+        'image': 'assets/images/quiz/profession/fishing_net.png',
       },
       {
         'text': 'Mechanic',
@@ -139,4 +140,18 @@ List<MoreThanOneCorrect> dummyMoreThanOneCorrect = [
       },
     ],
   ),
+];
+
+final List<AudioGame> dummyAudioGames = [
+  AudioGame(
+    answers: [
+      'young',
+      'new',
+      'novel',
+      'infant',
+      'newborn',
+      'recent',
+    ],
+    question: 'What is the opposite of old?',
+  )
 ];

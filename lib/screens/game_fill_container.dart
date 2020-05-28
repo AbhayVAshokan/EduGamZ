@@ -1,6 +1,8 @@
 // Game where the user needs to shade the fraction of container.
 
+import 'package:edugamz/widgets/game/fill_container/calculation_canvas.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../widgets/game/top_bar.dart';
 import '../widgets/game/bottom_bar.dart';
@@ -37,7 +39,7 @@ class GameFillContainerState extends State<GameFillContainer> {
                             child: Column(
                               children: [
                                 Expanded(
-                                  flex: 5,
+                                  flex: 6,
                                   child: LayoutBuilder(
                                     builder: (context, constraints) =>
                                         Container(
@@ -53,22 +55,21 @@ class GameFillContainerState extends State<GameFillContainer> {
                                             BorderRadius.circular(30.0),
                                       ),
                                       alignment: Alignment.center,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         question,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: constraints.maxHeight < 150
-                                              ? 12.0
-                                              : 15.0,
+                                          fontSize: 18.0,
                                           letterSpacing: 0.5,
                                         ),
+                                        maxLines: 5,
                                       ),
                                     ),
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 3,
-                                  child: Container(),
+                                  flex: 5,
+                                  child: CalculationCanvas(),
                                 ),
                               ],
                             ),
