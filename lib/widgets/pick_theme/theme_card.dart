@@ -11,7 +11,10 @@ class ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/countdown'),
+      onTap: () => Navigator.pushNamed(
+        context,
+        '/countdown',
+      ),
       child: LayoutBuilder(
         builder: (context, constraints) => Container(
           width: double.infinity,

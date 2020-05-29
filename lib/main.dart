@@ -3,15 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import './screens/game_mcq.dart';
 import './screens/pick_level.dart';
 import './screens/pick_theme.dart';
-import './screens/login_screen.dart';
 import './screens/splash_screen.dart';
-import './screens/loading_screen.dart';
 import './screens/welcome_screen.dart';
 import './screens/category_screen.dart';
-import './screens/game_fill_container.dart';
+import './screens/countdown_screen.dart';
 import './resources/screen_transitions.dart';
 
 void main() {
@@ -42,16 +39,6 @@ class EduGamZ extends StatelessWidget {
               screen: SplashScreen(),
             );
             break;
-          case '/login':
-            screen = fadeTransition(
-              screen: LoginScreen(),
-            );
-            break;
-          case '/welcome':
-            screen = fadeTransition(
-              screen: WelcomeScreen(),
-            );
-            break;
           case '/level':
             screen = fadeTransition(
               screen: PickLevel(),
@@ -67,24 +54,16 @@ class EduGamZ extends StatelessWidget {
               screen: PickTheme(),
             );
             break;
+          case '/welcome':
+            screen = fadeTransition(
+              screen: WelcomeScreen(),
+            );
+            break;
           case '/countdown':
             screen = fadeTransition(
-              screen: LoadingScreen(),
+              screen: CountdownScreen(),
             );
             break;
-
-          case '/gameMCQ':
-            screen = fadeTransition(
-              screen: GameMCQ(),
-            );
-            break;
-          case '/gameFillContainer':
-            screen = fadeTransition(
-              screen: GameFillContainer(),
-            );
-            break;
-
-          default:
         }
         return screen;
       },

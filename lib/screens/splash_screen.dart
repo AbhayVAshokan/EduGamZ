@@ -1,3 +1,5 @@
+// Screen shown as placeholder when all the API requests are done in the background.
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';

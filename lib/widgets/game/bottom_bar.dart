@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../game/show_leaderboard.dart';
+import '../../resources/realtime_data.dart';
 
 class BottomBar extends StatelessWidget {
   final bool resultScreen;
@@ -23,7 +23,10 @@ class BottomBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () {
+                Navigator.pop(context);
+                gameNumber = 0;
+              },
               child: FittedBox(
                 child: CustomPaint(
                   child: Padding(
@@ -32,7 +35,7 @@ class BottomBar extends StatelessWidget {
                       bottom: 5.0,
                     ),
                     child: Image.asset(
-                      'assets/images/quiz/quit.png',
+                      'assets/images/game/quit.png',
                       fit: BoxFit.contain,
                       width: mediaQuery.size.height * 0.15,
                       height: mediaQuery.size.height * 0.15,
@@ -44,27 +47,19 @@ class BottomBar extends StatelessWidget {
             ),
             SizedBox(
               height: mediaQuery.size.height * 0.15,
-              child: GestureDetector(
-                onVerticalDragEnd: (details) {
-                  if (details.primaryVelocity < -200)
-                    showLeaderBoard(
-                      context: context,
-                    );
-                },
-                child: CustomPaint(
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    child: Transform.rotate(
-                      angle: -pi / 2,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 25.0,
-                        color: Colors.blueGrey,
-                      ),
+              child: CustomPaint(
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  child: Transform.rotate(
+                    angle: -pi / 2,
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 25.0,
+                      color: Colors.blueGrey,
                     ),
                   ),
-                  painter: BottomDrawer(),
                 ),
+                painter: BottomDrawer(),
               ),
             ),
             FittedBox(
@@ -75,7 +70,7 @@ class BottomBar extends StatelessWidget {
                     bottom: 5.0,
                   ),
                   child: Image.asset(
-                    'assets/images/quiz/coin.png',
+                    'assets/images/game/coin.png',
                     fit: BoxFit.contain,
                     width: mediaQuery.size.height * 0.15,
                     height: mediaQuery.size.height * 0.15,

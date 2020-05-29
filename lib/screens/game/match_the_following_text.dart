@@ -2,28 +2,28 @@
 
 import 'package:flutter/material.dart';
 
-import './game_audio.dart';
-import './answer_animation.dart';
-import '../widgets/game/top_bar.dart';
-import '../resources/dummy_data.dart';
-import '../widgets/game/question.dart';
-import '../widgets/game/bottom_bar.dart';
-import '../models/game/match_the_following.dart';
-import '../widgets/game/match_the_following_text/matching_painter.dart';
+import '../answer_animation.dart';
+import '../../widgets/game/top_bar.dart';
+import '../../widgets/game/question.dart';
+import '../../widgets/game/bottom_bar.dart';
+import '../../resources/realtime_data.dart';
+import '../../resources/screen_transitions.dart';
+import '../../resources/game__screen_sequence.dart';
+import '../../models/game/match_the_following.dart';
+import '../../widgets/game/match_the_following_text/matching_painter.dart';
 
-class GameMatchTheFollowingText extends StatefulWidget {
+class MatchTheFollowingText extends StatefulWidget {
   final MatchTheFollowing question;
 
-  GameMatchTheFollowingText({
+  MatchTheFollowingText({
     @required this.question,
   });
 
   @override
-  _GameMatchTheFollowingTextState createState() =>
-      _GameMatchTheFollowingTextState();
+  _MatchTheFollowingTextState createState() => _MatchTheFollowingTextState();
 }
 
-class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
+class _MatchTheFollowingTextState extends State<MatchTheFollowingText> {
   List<GlobalKey> _textKey = [];
   List<GlobalKey> _imageKey = [];
   final GlobalKey _canvasKey = GlobalKey();
@@ -240,20 +240,23 @@ class _GameMatchTheFollowingTextState extends State<GameMatchTheFollowingText> {
                   }
                   if (allAttempted &&
                       sourcePoint != null &&
-                      destinationPoint != null)
+                      destinationPoint != null) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => AnswerAnimation(
+                      fadeTransition(
+                        screen: AnswerAnimation(
                           correct: correct,
-                          nextScreen: correct
-                              ? GameAudio(
-                                  question: dummyAudioGames[0],
-                                )
-                              : null,
+                          nextScreen: gameScreen[gameNumber++],
                         ),
                       ),
                     );
+                    
+                    setState(() {
+                      points = [];
+                      completed = [];
+                      permanentLines = [];
+                    });
+                  }
                 },
                 onPanUpdate: (DragUpdateDetails details) {
                   setState(() {

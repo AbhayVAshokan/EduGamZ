@@ -3,9 +3,12 @@
 import 'dart:ui';
 import 'dart:async';
 
-import 'package:edugamz/resources/dummy_data.dart';
-import 'package:edugamz/screens/game_circle_answer.dart';
 import 'package:flutter/material.dart';
+
+import '../../../resources/realtime_data.dart';
+import '../../../screens/answer_animation.dart';
+import '../../../resources/screen_transitions.dart';
+import '../../../resources/game__screen_sequence.dart';
 
 class ColoringCanvas extends StatefulWidget {
   final double imageHeight;
@@ -41,11 +44,12 @@ class _ColoringCanvasState extends State<ColoringCanvas> {
         onPanEnd: (DragEndDetails details) {
           Timer(
             const Duration(seconds: 1),
-            () => Navigator.pushReplacement(
+            () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => GameCircleAnswer(
-                  question: dummyMoreThanOneCorrect[1],
+              fadeTransition(
+                screen: AnswerAnimation(
+                  correct: true,
+                  nextScreen: gameScreen[gameNumber++],
                 ),
               ),
             ),

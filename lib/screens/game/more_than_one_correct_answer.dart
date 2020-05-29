@@ -1,21 +1,26 @@
+// More than one correct answer exists. Choose all of them and click submit.
+
 import 'package:flutter/material.dart';
 
-import '../widgets/game/top_bar.dart';
-import '../widgets/game/question.dart';
-import '../widgets/game/bottom_bar.dart';
-import '../screens/answer_animation.dart';
-import '../screens/game_fill_container.dart';
-import '../models/game/more_than_one_correct.dart';
+import '../answer_animation.dart';
+import '../../widgets/game/top_bar.dart';
+import '../../widgets/game/question.dart';
+import '../../widgets/game/bottom_bar.dart';
+import '../../resources/realtime_data.dart';
+import '../../resources/screen_transitions.dart';
+import '../../resources/game__screen_sequence.dart';
+import '../../models/game/more_than_one_correct.dart';
 
-class GameMoreThanOne extends StatefulWidget {
+class MoreThanOneCorrectAnswer extends StatefulWidget {
   final MoreThanOneCorrect question;
-  GameMoreThanOne({@required this.question});
+  MoreThanOneCorrectAnswer({@required this.question});
 
   @override
-  _GameMoreThanOneState createState() => _GameMoreThanOneState();
+  _MoreThanOneCorrectAnswerState createState() =>
+      _MoreThanOneCorrectAnswerState();
 }
 
-class _GameMoreThanOneState extends State<GameMoreThanOne> {
+class _MoreThanOneCorrectAnswerState extends State<MoreThanOneCorrectAnswer> {
   int chances = 2;
   List<Color> _borderColor = [];
   List<bool> _selected = [];
@@ -123,7 +128,7 @@ class _GameMoreThanOneState extends State<GameMoreThanOne> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                bool correctAnswer = true;
+                                bool correct = true;
 
                                 chances -= 1;
 
@@ -135,8 +140,7 @@ class _GameMoreThanOneState extends State<GameMoreThanOne> {
                                               ['correct']) ||
                                       (!_selected[i] &&
                                           widget.question.options[i]
-                                              ['correct']))
-                                    correctAnswer = false;
+                                              ['correct'])) correct = false;
 
                                   if (_selected[i]) {
                                     if (widget.question.options[i]['correct'])
@@ -149,13 +153,10 @@ class _GameMoreThanOneState extends State<GameMoreThanOne> {
                                 }
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AnswerAnimation(
-                                      correct: correctAnswer,
-                                      nextScreen:
-                                          (correctAnswer || chances <= 0)
-                                              ? GameFillContainer()
-                                              : null,
+                                  fadeTransition(
+                                    screen: AnswerAnimation(
+                                      correct: correct || chances <= 0,
+                                      nextScreen: gameScreen[gameNumber++],
                                     ),
                                   ),
                                 );

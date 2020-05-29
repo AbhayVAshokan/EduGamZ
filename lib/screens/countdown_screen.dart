@@ -4,14 +4,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../screens/game_mcq.dart';
+import '../resources/realtime_data.dart';
+import '../resources/screen_transitions.dart';
+import '../resources/game__screen_sequence.dart';
 
-class LoadingScreen extends StatefulWidget {
+class CountdownScreen extends StatefulWidget {
   @override
   _CountDownState createState() => _CountDownState();
 }
 
-class _CountDownState extends State<LoadingScreen> {
+class _CountDownState extends State<CountdownScreen> {
   double _opacity2 = 1.0, _opacity3 = 1.0;
 
   @override
@@ -22,16 +24,8 @@ class _CountDownState extends State<LoadingScreen> {
       ),
       () => Navigator.pushReplacement(
         context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              FadeTransition(
-            opacity: Tween(
-              begin: 0.0,
-              end: 1.0,
-            ).animate(animation),
-            child: GameMCQ(),
-          ),
-          transitionDuration: const Duration(microseconds: 1),
+        fadeTransition(
+          screen: gameScreen[gameNumber++],
         ),
       ),
     );

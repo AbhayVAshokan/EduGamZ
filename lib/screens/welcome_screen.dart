@@ -4,16 +4,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../services/api_calls.dart';
-
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
-
-    // API requests
-    getThemes();
-    getQuestions();
 
     Timer(
       const Duration(seconds: 3),

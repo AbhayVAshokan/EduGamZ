@@ -1,23 +1,24 @@
 // Game where the user needs to shade the fraction of container.
 
-import 'package:edugamz/widgets/game/fill_container/calculation_canvas.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import '../widgets/game/top_bar.dart';
-import '../widgets/game/bottom_bar.dart';
-import '../widgets/game/fill_container/beaker.dart';
+import '../../widgets/game/top_bar.dart';
+import '../../widgets/game/bottom_bar.dart';
+import '../../models/game/container_filling.dart';
+import '../../widgets/game/fill_container/beaker.dart';
+import '../../widgets/game/fill_container/calculation_canvas.dart';
 
-class GameFillContainer extends StatefulWidget {
+class FillContainer extends StatefulWidget {
+  final ContainerFilling question;
+
+  FillContainer({@required this.question});
+
   @override
-  GameFillContainerState createState() => GameFillContainerState();
+  FillContainerState createState() => FillContainerState();
 }
 
-class GameFillContainerState extends State<GameFillContainer> {
-  final String question =
-      'A 1 litre beaker is filled with 500mL of water . 250mL is added later. 0.05L is removed and only 30mL condensed water is collected. Indicate the quantity of water left in the beaker (in mL).';
-  final double solution = 670.0;
-
+class FillContainerState extends State<FillContainer> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -56,7 +57,7 @@ class GameFillContainerState extends State<GameFillContainer> {
                                       ),
                                       alignment: Alignment.center,
                                       child: AutoSizeText(
-                                        question,
+                                        widget.question.question,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 18.0,

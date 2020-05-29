@@ -1,23 +1,31 @@
+// Choose one from all the options provided.
+
 import 'dart:async';
 
-import 'package:edugamz/screens/answer_animation.dart';
 import 'package:flutter/material.dart';
 
-import '../models/game/mcq.dart';
-import '../resources/dummy_data.dart';
-import '../widgets/game/top_bar.dart';
-import '../widgets/game/question.dart';
-import '../widgets/game/bottom_bar.dart';
-import '../screens/game_more_than_one.dart';
+import '../answer_animation.dart';
+import '../../models/game/mcq.dart';
+import '../../widgets/game/top_bar.dart';
+import '../../widgets/game/question.dart';
+import '../../widgets/game/bottom_bar.dart';
+import '../../resources/realtime_data.dart';
+import '../../resources/screen_transitions.dart';
+import '../../resources/game__screen_sequence.dart';
 
-class GameMCQ extends StatefulWidget {
-  final MCQ question = dummyMcqQuestions[0];
+class MultipleChoiceQuestion extends StatefulWidget {
+  final MCQ question;
+
+  MultipleChoiceQuestion({
+    @required this.question,
+  });
 
   @override
-  _GameMCQState createState() => _GameMCQState();
+  _MultipleChoiceQuestionState createState() => _MultipleChoiceQuestionState();
 }
 
-class _GameMCQState extends State<GameMCQ> with TickerProviderStateMixin {
+class _MultipleChoiceQuestionState extends State<MultipleChoiceQuestion>
+    with TickerProviderStateMixin {
   int chances = 2;
   List<Color> borderColor = [];
 
@@ -50,12 +58,10 @@ class _GameMCQState extends State<GameMCQ> with TickerProviderStateMixin {
           const Duration(milliseconds: 250),
           () => Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => AnswerAnimation(
+            fadeTransition(
+              screen: AnswerAnimation(
                 correct: correct,
-                nextScreen: (correct || chances <= 0)
-                    ? GameMoreThanOne(question: dummyMoreThanOneCorrect[0])
-                    : null,
+                nextScreen: gameScreen[gameNumber++],
               ),
             ),
           ),

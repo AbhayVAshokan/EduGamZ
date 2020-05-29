@@ -1,26 +1,33 @@
+// Speak out the solution to the question.
+
 import 'dart:async';
 
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:edugamz/screens/answer_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
-import '../widgets/game/top_bar.dart';
-import '../widgets/game/question.dart';
-import '../models/game/audio_game.dart';
-import '../widgets/game/bottom_bar.dart';
+import '../answer_animation.dart';
+import '../../widgets/game/top_bar.dart';
+import '../../widgets/game/question.dart';
+import '../../widgets/game/bottom_bar.dart';
+import '../../resources/realtime_data.dart';
+import '../../models/game/speaking_answer.dart';
+import '../../resources/screen_transitions.dart';
+import '../../resources/game__screen_sequence.dart';
 
-class GameAudio extends StatefulWidget {
-  final AudioGame question;
+class SpeakAnswer extends StatefulWidget {
+  final SpeakingAnswer question;
 
-  GameAudio({@required this.question});
+  SpeakAnswer({
+    @required this.question,
+  });
 
   @override
   _GameAudioState createState() => _GameAudioState();
 }
 
-class _GameAudioState extends State<GameAudio> {
+class _GameAudioState extends State<SpeakAnswer> {
   String resultText = "";
   String text = 'Tap to Speak';
   Color containerColor = const Color(0xfffaedf0);
@@ -60,9 +67,10 @@ class _GameAudioState extends State<GameAudio> {
       });
     });
 
-    _speechRecognition.setRecognitionCompleteHandler(() {
+    _speechRecognition.setRecognitionCompleteHandler((value) {
       setState(() {
         _isListening = false;
+        resultText = value;
       });
     });
 
@@ -128,16 +136,19 @@ class _GameAudioState extends State<GameAudio> {
                                         });
                                       },
                                       onLongPressEnd: (details) {
+                                        final bool correct = widget
+                                            .question.answers
+                                            .contains(resultText);
+
                                         Timer(
                                           const Duration(milliseconds: 500),
                                           () => Navigator.push(
                                             context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AnswerAnimation(
-                                                correct: widget.question.answers
-                                                    .contains(resultText),
-                                                nextScreen: null,
+                                            fadeTransition(
+                                              screen: AnswerAnimation(
+                                                correct: correct,
+                                                nextScreen:
+                                                    gameScreen[gameNumber++],
                                               ),
                                             ),
                                           ),

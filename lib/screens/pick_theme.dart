@@ -1,6 +1,8 @@
+// Pick any theme for the set of games.
+
 import 'package:flutter/material.dart';
 
-import '../resources/realtime_data.dart';
+import '../models/themes.dart';
 import '../widgets/pick_theme/theme_card.dart';
 
 class PickTheme extends StatelessWidget {

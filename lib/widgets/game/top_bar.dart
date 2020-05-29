@@ -1,7 +1,7 @@
 // Display the top bar containing game stats.
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class TopBar extends StatelessWidget {
   @override

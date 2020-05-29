@@ -124,9 +124,11 @@ packages:
   speech_recognition:
     dependency: "direct main"
     description:
-      name: speech_recognition
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: "82ccef031b7549d5fa71aae4e458a24303d77004"
+      url: "https://github.com/webeverde/speech_recognition.git"
+    source: git
     version: "0.3.0+1"
   stack_trace:
     dependency: transitive

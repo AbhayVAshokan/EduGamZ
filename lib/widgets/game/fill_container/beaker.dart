@@ -1,3 +1,5 @@
+// Display beaker for the fill-container screen.
+
 import 'package:flutter/material.dart';
 
 import './coloring_canvas.dart';
@@ -12,7 +14,7 @@ class Beaker extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Image.asset(
-            'assets/images/quiz/beaker.png',
+            'assets/images/game/beaker.png',
             fit: BoxFit.contain,
             height: _imageHeight,
           ),

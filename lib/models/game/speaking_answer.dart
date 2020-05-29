@@ -2,11 +2,11 @@
 
 import 'package:flutter/foundation.dart';
 
-class AudioGame {
+class SpeakingAnswer {
   final String question;
   final List<String> answers;
 
-  AudioGame({
+  SpeakingAnswer({
     @required this.answers,
     @required this.question,
   });

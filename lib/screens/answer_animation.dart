@@ -1,3 +1,5 @@
+// Animated check-mark or wrong-cross screen after a question is answered.
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import '../widgets/game/bottom_bar.dart';
 class AnswerAnimation extends StatefulWidget {
   final bool correct;
   final Widget nextScreen;
+
   AnswerAnimation({
     @required this.correct,
     this.nextScreen,
@@ -36,7 +39,7 @@ class _AnswerAnimationState extends State<AnswerAnimation> {
     Timer(
       const Duration(seconds: 3),
       () {
-        if (widget.nextScreen == null)
+        if (!widget.correct)
           Navigator.pop(context);
         else
           Navigator.pushAndRemoveUntil(
@@ -92,8 +95,8 @@ class _AnswerAnimationState extends State<AnswerAnimation> {
                               image: DecorationImage(
                                 image: AssetImage(
                                   widget.correct
-                                      ? 'assets/images/quiz/correct.png'
-                                      : 'assets/images/quiz/wrong.png',
+                                      ? 'assets/images/game/correct.png'
+                                      : 'assets/images/game/wrong.png',
                                 ),
                                 fit: BoxFit.cover,
                               ),

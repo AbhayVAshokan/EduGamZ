@@ -1,24 +1,25 @@
 // Circle all the correct answers
 
-import 'package:edugamz/resources/dummy_data.dart';
-import 'package:edugamz/screens/answer_animation.dart';
-import 'package:edugamz/screens/game_match_the_following_text.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/game/top_bar.dart';
-import '../widgets/game/question.dart';
-import '../widgets/game/bottom_bar.dart';
-import '../models/game/more_than_one_correct.dart';
+import '../answer_animation.dart';
+import '../../widgets/game/top_bar.dart';
+import '../../widgets/game/question.dart';
+import '../../widgets/game/bottom_bar.dart';
+import '../../resources/realtime_data.dart';
+import '../../resources/screen_transitions.dart';
+import '../../resources/game__screen_sequence.dart';
+import '../../models/game/more_than_one_correct.dart';
 
-class GameCircleAnswer extends StatefulWidget {
+class CircleAnswer extends StatefulWidget {
   final MoreThanOneCorrect question;
-  GameCircleAnswer({@required this.question});
+  CircleAnswer({@required this.question});
 
   @override
-  _GameCircleAnswerState createState() => _GameCircleAnswerState();
+  _CircleAnswerState createState() => _CircleAnswerState();
 }
 
-class _GameCircleAnswerState extends State<GameCircleAnswer> {
+class _CircleAnswerState extends State<CircleAnswer> {
   List<Color> _colors = [];
   List<bool> _selected = [];
   int chances = 2;
@@ -124,17 +125,12 @@ class _GameCircleAnswerState extends State<GameCircleAnswer> {
                     if (widget.question.options[i]['correct'] != _selected[i])
                       correct = false;
                   }
-
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => AnswerAnimation(
+                    fadeTransition(
+                      screen: AnswerAnimation(
                         correct: correct,
-                        nextScreen: correct
-                            ? GameMatchTheFollowingText(
-                                question: dummyMatchTheFollowingQuestions[0],
-                              )
-                            : null,
+                        nextScreen: gameScreen[gameNumber++],
                       ),
                     ),
                   );

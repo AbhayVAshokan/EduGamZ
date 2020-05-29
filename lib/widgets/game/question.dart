@@ -1,10 +1,12 @@
-// Display the question inside a yellow container.
+// Display the question card
 
 import 'package:flutter/material.dart';
 
 class Question extends StatelessWidget {
   final String question;
-  Question({@required this.question});
+  Question({
+    @required this.question,
+  });
 
   @override
   Widget build(BuildContext context) {

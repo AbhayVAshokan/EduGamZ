@@ -1,3 +1,5 @@
+// Canvas to perform rough calculations.
+
 import 'package:flutter/material.dart';
 
 class CalculationCanvas extends StatefulWidget {
