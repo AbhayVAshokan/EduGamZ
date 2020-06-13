@@ -94,7 +94,9 @@ class _MoreThanOneCorrectAnswerState extends State<MoreThanOneCorrectAnswer> {
             children: [
               Column(
                 children: [
-                  TopBar(),
+                  TopBar(
+                    gameNumber: gameNumber,
+                  ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,

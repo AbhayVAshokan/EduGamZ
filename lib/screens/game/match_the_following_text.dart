@@ -65,7 +65,9 @@ class _MatchTheFollowingTextState extends State<MatchTheFollowingText> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TopBar(),
+                TopBar(
+                  gameNumber: gameNumber,
+                ),
                 const SizedBox(height: 20.0),
                 Question(question: widget.question.question),
                 const SizedBox(height: 20.0),
@@ -250,7 +252,7 @@ class _MatchTheFollowingTextState extends State<MatchTheFollowingText> {
                         ),
                       ),
                     );
-                    
+
                     setState(() {
                       points = [];
                       completed = [];

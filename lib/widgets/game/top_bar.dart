@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class TopBar extends StatelessWidget {
+  final int gameNumber;
+  TopBar({
+    @required this.gameNumber,
+  });
+
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -81,7 +86,7 @@ class TopBar extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Game 1/15',
+                        'Game $gameNumber/15',
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,

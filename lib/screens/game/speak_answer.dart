@@ -64,6 +64,20 @@ class _GameAudioState extends State<SpeakAnswer> {
     _speechRecognition.setRecognitionResultHandler((text) {
       setState(() {
         resultText = text;
+        final bool correct = widget.question.answers.contains(resultText);
+
+        Timer(
+          const Duration(milliseconds: 500),
+          () => Navigator.push(
+            context,
+            fadeTransition(
+              screen: AnswerAnimation(
+                correct: correct,
+                nextScreen: gameScreen[gameNumber++],
+              ),
+            ),
+          ),
+        );
       });
     });
 
@@ -100,7 +114,9 @@ class _GameAudioState extends State<SpeakAnswer> {
             children: [
               Column(
                 children: [
-                  TopBar(),
+                  TopBar(
+                    gameNumber: gameNumber,
+                  ),
                   const SizedBox(height: 20.0),
                   Question(question: widget.question.question),
                   const SizedBox(height: 20.0),
@@ -136,24 +152,6 @@ class _GameAudioState extends State<SpeakAnswer> {
                                         });
                                       },
                                       onLongPressEnd: (details) {
-                                        final bool correct = widget
-                                            .question.answers
-                                            .contains(resultText);
-
-                                        Timer(
-                                          const Duration(milliseconds: 500),
-                                          () => Navigator.push(
-                                            context,
-                                            fadeTransition(
-                                              screen: AnswerAnimation(
-                                                correct: correct,
-                                                nextScreen:
-                                                    gameScreen[gameNumber++],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-
                                         setState(() {
                                           containerColor =
                                               const Color(0xfffaedf0);

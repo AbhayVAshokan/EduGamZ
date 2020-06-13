@@ -113,7 +113,9 @@ class _MultipleChoiceQuestionState extends State<MultipleChoiceQuestion>
             children: [
               Column(
                 children: [
-                  TopBar(),
+                  TopBar(
+                    gameNumber: gameNumber,
+                  ),
                   SizedBox(height: mediaQuery.size.height * 0.025),
                   Expanded(
                     child: Column(

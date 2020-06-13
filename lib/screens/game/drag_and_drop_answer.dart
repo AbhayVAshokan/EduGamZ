@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../answer_animation.dart';
 import '../../widgets/game/top_bar.dart';
 import '../../widgets/game/bottom_bar.dart';
+import '../../resources/realtime_data.dart';
 import '../../models/game/drag_and_drop.dart';
 
 class DragAndDropAnswer extends StatefulWidget {
@@ -44,7 +45,9 @@ class _DragAndDropAnswerState extends State<DragAndDropAnswer> {
             children: [
               Column(
                 children: [
-                  TopBar(),
+                  TopBar(
+                    gameNumber: gameNumber,
+                  ),
                   SizedBox(height: mediaQuery.size.height * 0.025),
                   Container(
                     height: mediaQuery.size.height * 0.2,

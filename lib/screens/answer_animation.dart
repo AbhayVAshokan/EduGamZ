@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/game/top_bar.dart';
 import '../widgets/game/bottom_bar.dart';
+import '../resources/realtime_data.dart';
+import '../resources/screen_transitions.dart';
 
 class AnswerAnimation extends StatefulWidget {
   final bool correct;
@@ -39,13 +41,14 @@ class _AnswerAnimationState extends State<AnswerAnimation> {
     Timer(
       const Duration(seconds: 3),
       () {
-        if (!widget.correct)
+        if (!widget.correct) {
+          gameNumber -= 1;
           Navigator.pop(context);
-        else
+        } else
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-              builder: (context) => widget.nextScreen,
+            fadeTransition(
+              screen: widget.nextScreen,
             ),
             (route) => route.isFirst,
           );
@@ -80,7 +83,9 @@ class _AnswerAnimationState extends State<AnswerAnimation> {
             children: [
               Column(
                 children: [
-                  TopBar(),
+                  TopBar(
+                    gameNumber: gameNumber - 1,
+                  ),
                   SizedBox(height: mediaQuery.size.height * 0.025),
                   Expanded(
                     child: SizedBox(

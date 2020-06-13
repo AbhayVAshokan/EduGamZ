@@ -45,7 +45,9 @@ class _CircleAnswerState extends State<CircleAnswer> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TopBar(),
+                TopBar(
+                  gameNumber: gameNumber,
+                ),
                 const SizedBox(height: 20.0),
                 Question(question: widget.question.question),
                 const SizedBox(height: 20.0),

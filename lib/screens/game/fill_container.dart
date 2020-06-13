@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../widgets/game/top_bar.dart';
 import '../../widgets/game/bottom_bar.dart';
+import '../../resources/realtime_data.dart';
 import '../../models/game/container_filling.dart';
 import '../../widgets/game/fill_container/beaker.dart';
 import '../../widgets/game/fill_container/calculation_canvas.dart';
@@ -29,7 +30,9 @@ class FillContainerState extends State<FillContainer> {
           children: [
             Column(
               children: [
-                TopBar(),
+                TopBar(
+                  gameNumber: gameNumber,
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),

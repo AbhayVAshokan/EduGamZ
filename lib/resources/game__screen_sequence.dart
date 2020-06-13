@@ -18,17 +18,17 @@ List<Widget> gameScreen = [
   MoreThanOneCorrectAnswer(
     question: moreThanOneCorrectQuestions[0],
   ),
-  FillContainer(
-    question: containerFillingQuestions[0],
-  ),
   CircleAnswer(
     question: moreThanOneCorrectQuestions[1],
+  ),
+  SpeakAnswer(
+    question: speakingAnswerQuestions[0],
   ),
   MatchTheFollowingText(
     question: matchTheFollowingQuestions[0],
   ),
-  SpeakAnswer(
-    question: speakingAnswerQuestions[0],
+  FillContainer(
+    question: containerFillingQuestions[0],
   ),
   DragAndDropAnswer(
     question: dragAndDropQuestions[0],
